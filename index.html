@@ -1,0 +1,365 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>جدول مناقشات التخرج - جامعة الزيتونة</title>
+    <link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans+Arabic:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        body {
+            font-family: 'IBM Plex Sans Arabic', sans-serif;
+            background-color: #f4f7f6;
+            margin: 0;
+            padding: 20px;
+            color: #333;
+        }
+        .container {
+            max-width: 800px;
+            margin: auto;
+            background: #fff;
+            border-radius: 10px;
+            box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+            overflow: hidden;
+        }
+        .header {
+            background-color: #1a5276;
+            color: #fff;
+            text-align: center;
+            padding: 20px;
+        }
+        .header h1 {
+            margin: 0;
+            font-size: 24px;
+        }
+        /* Tabs Styling */
+        .tab {
+            display: flex;
+            background-color: #e5e8e8;
+            border-bottom: 2px solid #ccc;
+        }
+        .tab button {
+            background-color: inherit;
+            color: #333;
+            flex: 1;
+            border: none;
+            outline: none;
+            cursor: pointer;
+            padding: 15px;
+            font-size: 16px;
+            font-weight: bold;
+            font-family: 'IBM Plex Sans Arabic', sans-serif;
+            transition: 0.3s;
+        }
+        .tab button:hover {
+            background-color: #d5d8d8;
+        }
+        .tab button.active {
+            background-color: #fff;
+            color: #1a5276;
+            border-bottom: 3px solid #1a5276;
+        }
+        /* Tab Content Styling */
+        .tabcontent {
+            display: none;
+            padding: 20px;
+            animation: fadeEffect 0.5s;
+        }
+        @keyframes fadeEffect {
+            from {opacity: 0;}
+            to {opacity: 1;}
+        }
+        /* Cards Styling */
+        .card {
+            background: #fdfdfd;
+            border-right: 4px solid #1a5276;
+            padding: 15px;
+            margin-bottom: 15px;
+            border-radius: 5px;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.05);
+        }
+        .card.secondary {
+            border-right-color: #27ae60;
+        }
+        .time-room {
+            font-size: 14px;
+            color: #666;
+            margin-bottom: 8px;
+            font-weight: bold;
+        }
+        .project-title {
+            font-size: 18px;
+            color: #2c3e50;
+            margin-bottom: 5px;
+        }
+        .students {
+            font-size: 15px;
+            color: #555;
+            line-height: 1.5;
+        }
+        .card-wrapper {
+            display: flex;
+            align-items: flex-start;
+            gap: 12px;
+            margin-bottom: 15px;
+        }
+        .checkbox-input {
+            width: 20px;
+            height: 20px;
+            min-width: 20px;
+            margin-top: 3px;
+            cursor: pointer;
+            accent-color: #1a5276;
+        }
+        .icon {
+            margin-left: 8px;
+            color: #1a5276;
+            font-size: 14px;
+        }
+        .names-list {
+            list-style: none;
+            padding: 0;
+            margin: 10px 0;
+        }
+        .names-list li {
+            padding: 8px 0;
+            padding-right: 20px;
+            border-bottom: 1px solid #f0f0f0;
+            display: flex;
+            align-items: center;
+        }
+        .names-list li:last-child {
+            border-bottom: none;
+        }
+        .names-list li:before {
+            content: \"\\f007\";
+            font-family: \"Font Awesome 6 Free\";
+            font-weight: 600;
+            margin-left: 10px;
+            font-size: 16px;
+            color: #1a5276;
+        }
+        /* Responsive Design */
+        @media (max-width: 768px) {
+            body {
+                padding: 10px;
+            }
+            .container {
+                max-width: 100%;
+            }
+            .header h1 {
+                font-size: 20px;
+            }
+            .tab button {
+                padding: 12px 8px;
+                font-size: 14px;
+            }
+            .card-wrapper {
+                flex-direction: column;
+                align-items: stretch;
+            }
+            .checkbox-input {
+                width: 18px;
+                height: 18px;
+                margin-top: 5px;
+            }
+            .card {
+                padding: 12px;
+            }
+            .time-room {
+                font-size: 13px;
+            }
+            .project-title {
+                font-size: 16px;
+            }
+            .students {
+                font-size: 14px;
+            }
+        }
+        @media (max-width: 480px) {
+            body {
+                padding: 8px;
+            }
+            .header h1 {
+                font-size: 18px;
+            }
+            .tab button {
+                padding: 10px 6px;
+                font-size: 12px;
+            }
+            .card {
+                padding: 10px;
+            }
+            .time-room {
+                font-size: 12px;
+            }
+            .project-title {
+                font-size: 14px;
+            }
+            .students {
+                font-size: 13px;
+            }
+        }
+    </style>
+</head>
+<body>
+
+<div class="container">
+    <div class="header">
+        <h1>جدول مناقشات التخرج <i class="fas fa-graduation-cap"></i></h1>
+    </div>
+
+    <div class="tab">
+        <button class="tablinks active" onclick="openTab(event, 'Main')">الحضور الأساسي</button>
+        <button class="tablinks" onclick="openTab(event, 'Greetings')">سلام ومباركة</button>
+    </div>
+
+    <div id="Main" class="tabcontent" style="display: block;">
+        <div class="card-wrapper">
+            <input type="checkbox" class="checkbox-input">
+            <div class="card">
+                <div class="time-room"><i class="fas fa-clock"></i> 9:30 - 9:50 صباحاً <span class="icon">|</span> <i class="fas fa-location-dot"></i> قاعة 9345</div>
+                <div class="students"><strong>الشباب:</strong> أحمد هشام أحمد، حمزة خليل رباع، رامي بهاء الدين البهبهاني، أبي بهاء الدين الشوابكة.</div>
+            </div>
+        </div>
+
+        <div class="card-wrapper">
+            <input type="checkbox" class="checkbox-input">
+            <div class="card">
+                <div class="time-room"><i class="fas fa-clock"></i> 11:00 - 11:20 صباحاً <span class="icon">|</span> <i class="fas fa-location-dot"></i> (خيارين - اختار اللي بناسبك)</div>
+                <div class="students">
+                    <strong>الخيار الأول (قاعة 9361):</strong> مشروع Wafdi (شهد خليل، منة الله، ليدا، قصي البستنجي).<br><br>
+                    <strong>الخيار الثاني (قاعة 9306):</strong> (عز الدين أبو رميلة، علي العمري، أنس سالم، رؤى الخطيب).
+                </div>
+            </div>
+        </div>
+
+        <div class="card-wrapper">
+            <input type="checkbox" class="checkbox-input">
+            <div class="card">
+                <div class="time-room"><i class="fas fa-clock"></i> 12:00 - 12:20 مساءً <span class="icon">|</span> <i class="fas fa-location-dot"></i> قاعة 9201</div>
+                <div class="project-title"><strong>مشروع:</strong> Smart Restaurant</div>
+                <div class="students"><strong>الشباب:</strong> حمزة قطمش، معن عابد، عمار أبو صفية، عامر القرناوي، زيد عيشة.</div>
+            </div>
+        </div>
+
+        <div class="card-wrapper">
+            <input type="checkbox" class="checkbox-input">
+            <div class="card">
+                <div class="time-room"><i class="fas fa-clock"></i> 1:00 - 1:20 مساءً <span class="icon">|</span> <i class="fas fa-location-dot"></i> قاعة 9361</div>
+                <div class="project-title"><strong>مشروع:</strong> ManagJO</div>
+                <div class="students"><strong>الشباب:</strong> محمد السلال، أسامة نمر، عمر صبري، عبدالرحمن أحمد عبدالرحمن.</div>
+            </div>
+        </div>
+    </div>
+
+    <div id="Greetings" class="tabcontent">
+        <div class="card-wrapper">
+            <input type="checkbox" class="checkbox-input">
+            <div class="card secondary">
+                <div class="time-room"><i class="fas fa-clock"></i> 9:30 - 9:50 صباحاً <span class="icon">|</span> <i class="fas fa-location-dot"></i> قاعة 9349</div>
+                <div class="students">
+                    <strong>الشباب:</strong>
+                    <ul class="names-list">
+                        <li>محمد عمار أبو غزي</li>
+                        <li>محمد ظهران عفانة</li>
+                        <li>صهيب محمد بطاح</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+
+        <div class="card-wrapper">
+            <input type="checkbox" class="checkbox-input">
+            <div class="card secondary">
+                <div class="time-room"><i class="fas fa-clock"></i> 11:00 - 11:20 صباحاً <span class="icon">|</span> <i class="fas fa-location-dot"></i> قاعة 9347</div>
+                <div class="students">
+                    <strong>الشباب:</strong>
+                    <ul class="names-list">
+                        <li>محمد جمال أبو عيشة</li>
+                        <li>محمود موسى الأسدي</li>
+                        <li>عز الدين محمد المغربي</li>
+                        <li>فدوى محمد الباشان</li>
+                        <li>ملاك خالد فوزي</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+
+        <div class="card-wrapper">
+            <input type="checkbox" class="checkbox-input">
+            <div class="card secondary">
+                <div class="time-room"><i class="fas fa-clock"></i> 12:00 - 12:20 مساءً <span class="icon">|</span> <i class="fas fa-location-dot"></i> قاعة 9361</div>
+                <div class="project-title"><strong>مشروع:</strong> مرشد</div>
+                <div class="students">
+                    <strong>الشباب:</strong>
+                    <ul class="names-list">
+                        <li>عبدالرحمن عازر</li>
+                        <li>نور الهدى حسين</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+
+        <div class="card-wrapper">
+            <input type="checkbox" class="checkbox-input">
+            <div class="card secondary">
+                <div class="time-room"><i class="fas fa-clock"></i> 12:30 - 12:50 مساءً <span class="icon">|</span> <i class="fas fa-location-dot"></i> قاعة 9361</div>
+                <div class="project-title"><strong>مشروع:</strong> PharmaPlus</div>
+                <div class="students">
+                    <strong>الشباب:</strong>
+                    <ul class="names-list">
+                        <li>مصطفى نوفل</li>
+                        <li>أيهم حسونة</li>
+                        <li>محمد ريحان</li>
+                        <li>محمد شويكة</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+
+        <div class="card-wrapper">
+            <input type="checkbox" class="checkbox-input">
+            <div class="card secondary">
+                <div class="time-room"><i class="fas fa-clock"></i> 1:00 - 1:20 مساءً <span class="icon">|</span> <i class="fas fa-location-dot"></i> قاعة 9201</div>
+                <div class="project-title"><strong>مشروع:</strong> Telemarketing Platform</div>
+                <div class="students">
+                    <strong>الشباب:</strong>
+                    <ul class="names-list">
+                        <li>وسيم صالح</li>
+                        <li>معاذ القشاط</li>
+                        <li>يزن عبدالفتاح</li>
+                        <li>حمزة العكاري</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<script>
+    function openTab(evt, tabName) {
+        var i, tabcontent, tablinks;
+        
+        // Hide all tab content
+        tabcontent = document.getElementsByClassName("tabcontent");
+        for (i = 0; i < tabcontent.length; i++) {
+            tabcontent[i].style.display = "none";
+        }
+        
+        // Remove the background color of all tablinks/buttons
+        tablinks = document.getElementsByClassName("tablinks");
+        for (i = 0; i < tablinks.length; i++) {
+            tablinks[i].className = tablinks[i].className.replace(" active", "");
+        }
+        
+        // Show the specific tab content
+        document.getElementById(tabName).style.display = "block";
+        
+        // Add an "active" class to the button that opened the tab
+        evt.currentTarget.className += " active";
+    }
+</script>
+
+</body>
+</html>
